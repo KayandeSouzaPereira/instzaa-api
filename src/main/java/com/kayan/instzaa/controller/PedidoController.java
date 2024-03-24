@@ -1,67 +1,105 @@
 package com.kayan.instzaa.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.kayan.instzaa.model.Pedido;
-import com.kayan.instzaa.model.PedidoDT;
+import com.kayan.instzaa.controller.dto.CardapioDTO;
+import com.kayan.instzaa.controller.dto.PedidoDTO;
+import com.kayan.instzaa.domain.model.Cardapio;
+import com.kayan.instzaa.domain.model.Pedido;
+import com.kayan.instzaa.service.CardapioService;
 import com.kayan.instzaa.service.PedidoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
 
 
+@RequestMapping("/pedido")
+@CrossOrigin
 @RestController
-@RequestMapping("pedido")
+@Tag(name = "Controlador dos Pedidos", description = "RESTful API for delivery.")
 public class PedidoController {
-	
-	@Lazy
-	@Autowired
-	private PedidoService service;
-	
-	@RequestMapping(value = "listPedido", method = RequestMethod.GET, produces = "application/json")
-	public Map<String, Object> listCardapio() throws Exception {
-		Map<String, Object> resposta = new HashMap<String, Object>();
-		
-		List<Pedido> lista = service.getAll();
-		resposta.put("lista", lista);
-		
-		return resposta;
-	}
-	
-	@RequestMapping(value = "savePedido", method = RequestMethod.POST,produces = "application/json")
-	public Map<String, Object> savePedido(@RequestBody PedidoDT item) throws Exception {
-		Map<String, Object> resposta = new HashMap<String, Object>();
-		
-		service.save(item);
-		
-		return resposta;
-	}
-	
-	@RequestMapping(value = "deletePedido", method = RequestMethod.POST,produces = "application/json")
-	public Map<String, Object> deletePedido(@RequestBody Long item) throws Exception {
-		Map<String, Object> resposta = new HashMap<String, Object>();
-		
-		service.removeById(item);
-		
-		return resposta;
-	}
-	
-	@RequestMapping(value = "findByIDPedido", method = RequestMethod.POST,produces = "application/json")
-	public Map<String, Object> findByIDPedido(@RequestBody Long item) throws Exception {
-		Map<String, Object> resposta = new HashMap<String, Object>();
-		
-		Optional<Pedido> pedido = service.findById(item);
-		resposta.put("pedido", pedido);
-		
-		return resposta;
-	}
+
+    private final PedidoService service;
+
+    public PedidoController(PedidoService pedidoService){
+        this.service = pedidoService;
+    }
+
+    @GetMapping("/")
+    @Operation(summary = "Lista pedidos", description = "Lista todos os pedidos realizados")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operação bem sucedida !"),
+            @ApiResponse(responseCode = "403", description = "Requisição não autorizada.")
+    })
+    public  ResponseEntity<List<Pedido>> list() {
+        return ResponseEntity.ok(service.list());
+    }
+    @GetMapping("/{id}")
+    @Operation(summary = "Pega pelo Id", description = "Retorna um único pedido pelo id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operação bem sucedida !"),
+            @ApiResponse(responseCode = "403", description = "Requisição não autorizada."),
+            @ApiResponse(responseCode = "404", description = "Pedido não encontrado.")
+    })
+
+    public ResponseEntity<PedidoDTO> getByID(@PathVariable("id") Long id) {
+        Pedido pedido = service.findById(id);
+        PedidoDTO pedidoDTO = PedidoDTO.fromDomain(pedido);
+        return ResponseEntity.ok(pedidoDTO);
+    }
+    @GetMapping("/page{page}/limit{limit}")
+    @Operation(summary = "Lista pedidos com paginação", description = "Lista todos os pedidos com opção de paginação e limite.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operação bem sucedida !"),
+            @ApiResponse(responseCode = "403", description = "Requisição não autorizada.")
+    })
+    public ResponseEntity<List<Pedido>> list(@PathVariable("page")Integer page, @PathVariable("limit")Integer limit) {
+        return ResponseEntity.ok(service.listPagination(page, limit));
+    }
+    @PostMapping
+    @Operation(summary = "Cria pedido", description = "Adiciona um novo pedido.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Pedido criado com sucesso !"),
+            @ApiResponse(responseCode = "403", description = "Requisição não autorizada."),
+            @ApiResponse(responseCode = "422", description = "Dados para a criação do pedido invalidos.")
+    })
+    public ResponseEntity<PedidoDTO> create(@RequestBody PedidoDTO pedidoDTO){
+        Pedido pedido = service.save(pedidoDTO);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(pedido.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(PedidoDTO.fromDomain(pedido));
+    }
+    @PutMapping("/{id}")
+    @Operation(summary = "Atualiza o pedido", description =  "Atualiza o pedido")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Pedido atualizado com sucesso !"),
+            @ApiResponse(responseCode = "404", description = "Pedido não encontrado."),
+            @ApiResponse(responseCode = "403", description = "Requisição não autorizada."),
+            @ApiResponse(responseCode = "422", description = "Dados para a atualização do pedido invalidos.")
+    })
+    public ResponseEntity<PedidoDTO> update(@PathVariable("id") Long id,@RequestBody PedidoDTO pedidoDTO){
+        return ResponseEntity.ok(service.update(id, pedidoDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Remove pedido", description = "Remove pedido")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Pedido removido com sucesso !"),
+            @ApiResponse(responseCode = "403", description = "Requisição não autorizada."),
+            @ApiResponse(responseCode = "404", description = "Pedido não encontrado.")
+    })
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 }
