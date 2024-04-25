@@ -20,7 +20,7 @@ public class InstzaaApiApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*");
+				registry.addMapping("/**").allowedOrigins("https://cors-test.codehappy.dev/");
 			}
 		};
 	}
