@@ -20,8 +20,8 @@ import javax.ws.rs.core.MediaType;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/cardapio")
-@CrossOrigin
 @RestController
 @Tag(name = "Controlador do Cardapio", description = "RESTful API for delivery.")
 public class CardapioController {
@@ -31,6 +31,7 @@ public class CardapioController {
     public CardapioController(CardapioService cardapioService){
         this.service = cardapioService;
     }
+
 
     @GetMapping("/")
     @Operation(summary = "Lista cardapio", description = "Lista todos os itens do cardapio")

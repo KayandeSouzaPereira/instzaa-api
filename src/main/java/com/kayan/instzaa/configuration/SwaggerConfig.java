@@ -24,16 +24,16 @@ public class SwaggerConfig {
 
         private Info apiInfo() {
             var contact = new Contact();
-            contact.setEmail("mailbox@product.com");
-            contact.setName("product_admin");
-            contact.setUrl("http://product.com");
+            contact.setEmail("kayandesouzapereira@hotmail.com");
+            contact.setName("Kayan de Souza");
+            contact.setUrl("https://kayandesouza.vercel.app");
             return new Info()
-                    .title("Product API")
-                    .description("Product description")
-                    .termsOfService("http://product.com/terms_of_service")
+                    .title("Instzaa API")
+                    .description("Api de Delivery")
+                    .termsOfService("")
                     .contact(contact)
                     // TODO: Version should be dynamically
-                    .version("0.5.1");
+                    .version("0.1.0");
         }
 
         private void addSecurity(OpenAPI openApi) {

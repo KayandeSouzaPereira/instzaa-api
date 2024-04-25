@@ -19,7 +19,6 @@ import java.util.List;
 
 
 @RequestMapping("/pedido")
-@CrossOrigin
 @RestController
 @Tag(name = "Controlador dos Pedidos", description = "RESTful API for delivery.")
 public class PedidoController {
