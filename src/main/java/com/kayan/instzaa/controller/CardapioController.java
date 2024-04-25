@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(exposedHeaders = {"Access-Control-Allow-Origin","Access-Control-Allow-Credentials"})
 @RequestMapping("/cardapio")
 @RestController
 @Tag(name = "Controlador do Cardapio", description = "RESTful API for delivery.")
