@@ -30,6 +30,7 @@ public class PedidoService {
         pedido.setNumeroContato(pedidoDTO.numeroContato());
         pedido.setData(pedidoDTO.data());
         pedido.setResumoPedido(pedidoDTO.resumoPedido());
+        pedido.setStatus(pedidoDTO.status());
         repository.save(pedido);
         return pedido;
     }
@@ -44,6 +45,7 @@ public class PedidoService {
         pedido.setNumeroContato(pedidoDTO.numeroContato());
         pedido.setData(pedidoDTO.data());
         pedido.setResumoPedido(pedidoDTO.resumoPedido());
+        pedido.setStatus(pedidoDTO.status());
         repository.save(pedido);
         return pedidoDTO;
     }
