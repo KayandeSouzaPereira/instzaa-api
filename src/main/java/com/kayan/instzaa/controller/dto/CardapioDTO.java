@@ -12,7 +12,7 @@ public record CardapioDTO(
         Integer id,
         String nome,
         String descricao,
-        byte[] imagem,
+        String imagem,
         BigDecimal preco,
         String categoria,
         boolean destaque,

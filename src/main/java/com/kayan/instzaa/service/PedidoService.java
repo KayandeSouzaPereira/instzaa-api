@@ -5,6 +5,7 @@ import com.kayan.instzaa.controller.dto.CardapioDTO;
 import com.kayan.instzaa.controller.dto.PedidoDTO;
 import com.kayan.instzaa.domain.model.Cardapio;
 import com.kayan.instzaa.domain.model.Pedido;
+import com.kayan.instzaa.domain.model.Status;
 import com.kayan.instzaa.domain.repository.PedidoRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +25,13 @@ public class PedidoService {
     public Pedido save(PedidoDTO pedidoDTO) {
         Pedido pedido = new Pedido();
         pedido.setNomeCliente(pedidoDTO.nomeCliente());
-        pedido.setCPF(pedidoDTO.CPF());
+        pedido.setCPF(pedidoDTO.cpf());
         pedido.setEndereco(pedidoDTO.endereco());
         pedido.setValor(pedidoDTO.valor());
         pedido.setNumeroContato(pedidoDTO.numeroContato());
         pedido.setData(pedidoDTO.data());
         pedido.setResumoPedido(pedidoDTO.resumoPedido());
-        pedido.setStatus(pedidoDTO.status());
+        pedido.setStatus(Status.valueOf(pedidoDTO.status()));
         repository.save(pedido);
         return pedido;
     }
@@ -39,13 +40,13 @@ public class PedidoService {
         Optional<Pedido> pedidoId = Optional.ofNullable(findById(id));
         Pedido pedido = pedidoId.get();
         pedido.setNomeCliente(pedidoDTO.nomeCliente());
-        pedido.setCPF(pedidoDTO.CPF());
+        pedido.setCPF(pedidoDTO.cpf());
         pedido.setEndereco(pedidoDTO.endereco());
         pedido.setValor(pedidoDTO.valor());
         pedido.setNumeroContato(pedidoDTO.numeroContato());
         pedido.setData(pedidoDTO.data());
         pedido.setResumoPedido(pedidoDTO.resumoPedido());
-        pedido.setStatus(pedidoDTO.status());
+        pedido.setStatus(Status.valueOf(pedidoDTO.status()));
         repository.save(pedido);
         return pedidoDTO;
     }

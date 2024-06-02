@@ -48,6 +48,7 @@ public class PedidoController {
 
     public ResponseEntity<PedidoDTO> getByID(@PathVariable("id") Long id) {
         Pedido pedido = service.findById(id);
+        System.out.println(pedido.getStatus());
         PedidoDTO pedidoDTO = PedidoDTO.fromDomain(pedido);
         return ResponseEntity.ok(pedidoDTO);
     }

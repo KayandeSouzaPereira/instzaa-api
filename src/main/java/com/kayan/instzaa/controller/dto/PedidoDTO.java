@@ -12,12 +12,12 @@ import java.util.Set;
 public record PedidoDTO(
         Integer id,
         String nomeCliente,
-        String CPF,
+        String cpf,
         String endereco,
         Date data,
         String numeroContato,
         BigDecimal valor,
-        Status status,
+        String status,
         Set<Cardapio> resumoPedido
 ) {
 
@@ -30,7 +30,7 @@ public record PedidoDTO(
                 pedido.getData(),
                 pedido.getNumeroContato(),
                 pedido.getValor(),
-                pedido.getStatus(),
+                pedido.getStatus().toString(),
                 pedido.getResumoPedido()
         );
     }
@@ -39,12 +39,12 @@ public record PedidoDTO(
         return new Pedido(
                 pedidoDTO.id(),
                 pedidoDTO.nomeCliente(),
-                pedidoDTO.CPF(),
+                pedidoDTO.cpf(),
                 pedidoDTO.endereco(),
                 pedidoDTO.data(),
                 pedidoDTO.numeroContato(),
                 pedidoDTO.valor(),
-                pedidoDTO.status(),
+                Status.valueOf(pedidoDTO.status()),
                 pedidoDTO.resumoPedido()
         );
     }

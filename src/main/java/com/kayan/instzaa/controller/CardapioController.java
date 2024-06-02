@@ -20,7 +20,6 @@ import javax.ws.rs.core.MediaType;
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/cardapio")
 @RestController
 @Tag(name = "Controlador do Cardapio", description = "RESTful API for delivery.")

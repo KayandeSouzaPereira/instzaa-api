@@ -31,7 +31,7 @@ public class Cardapio {
     private String descricao;
 
     @Column
-    private byte[] imagem;
+    private String imagem;
 
     @Column
     private BigDecimal preco;
@@ -47,14 +47,14 @@ public class Cardapio {
 
 
 
-    public Cardapio(String nome, String descricao, byte[] imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao) {
+    public Cardapio(String nome, String descricao, String imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao) {
     }
 
 
-    public static Cardapio create(String nome, String descricao, byte[] imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao) {
+    public static Cardapio create(String nome, String descricao, String imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao) {
         return new Cardapio(nome, descricao, imagem, preco, categoria, destaque, promocao);
     }
-    public static Cardapio update(Integer id, String nome, String descricao, byte[] imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao) {
+    public static Cardapio update(Integer id, String nome, String descricao, String imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao) {
         return new Cardapio(id, nome, descricao, imagem, preco, categoria, destaque, promocao);
     }
 

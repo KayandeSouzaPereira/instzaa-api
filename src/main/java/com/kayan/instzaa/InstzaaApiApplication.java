@@ -1,5 +1,6 @@
 package com.kayan.instzaa;
 
+import com.mercadopago.MercadoPagoConfig;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,8 @@ public class InstzaaApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(InstzaaApiApplication.class, args);
 	}
+
+
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
