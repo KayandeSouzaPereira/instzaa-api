@@ -1,6 +1,5 @@
 package com.kayan.instzaa;
 
-import com.mercadopago.MercadoPagoConfig;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.boot.SpringApplication;
