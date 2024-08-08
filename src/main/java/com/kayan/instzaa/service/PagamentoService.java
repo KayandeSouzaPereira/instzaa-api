@@ -18,6 +18,10 @@ public class PagamentoService {
     private String CLIENT_ID;
     @Value("${Efi.CLIENT_SECRET}")
     private String CLIENT_SECRET;
+    @Value("${Efi.SANDBOX}")
+    private boolean SANDBOX;
+    @Value("${Efi.Cert}")
+    private String certificado;
 
 
 
@@ -25,8 +29,8 @@ public class PagamentoService {
             JSONObject options = new JSONObject();
             options.put("client_id", CLIENT_ID);
             options.put("client_secret", CLIENT_SECRET);
-            options.put("certificate", "./certs/homologacao-571485-Instzaa-HML.p12");
-            options.put("sandbox", true);
+            options.put("certificate", certificado);
+            options.put("sandbox", SANDBOX);
 
             EfiPay efi = new EfiPay(options);
 
@@ -68,7 +72,8 @@ public class PagamentoService {
         JSONObject item = new JSONObject();
         item.put("name", "Produto Teste");
         item.put("amount", 1);
-        item.put("value", pagamento.Valor());
+        item.put("value", Integer.parseInt(pagamento.Valor()));
+        listItem.put(item);
 
         JSONObject cliente = new JSONObject();
         cliente.put("name", pagamento.Nome());

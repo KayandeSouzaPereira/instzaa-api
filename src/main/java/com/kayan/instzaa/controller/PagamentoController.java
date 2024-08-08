@@ -44,7 +44,7 @@ public class PagamentoController {
     })
     public ResponseEntity<String> criarPagamentoCartao(PagamentoCartaoDTO pagamento) throws Exception{
         service.createPagamentoCartao(pagamento);
-        return ResponseEntity.ok("Cobrança Realizada !");
+        return ResponseEntity.ok("Cobranca Realizada !");
     }
 
 
