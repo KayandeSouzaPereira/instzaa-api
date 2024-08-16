@@ -1,15 +1,16 @@
 package com.kayan.instzaa.service;
-import com.kayan.instzaa.controller.dto.PagamentoCartaoDTO;
-import com.kayan.instzaa.controller.dto.PagamentoCriacaoDTO;
-import com.kayan.instzaa.controller.dto.PagamentoQrDTO;
+import br.com.efi.efisdk.exceptions.EfiPayException;
+import com.kayan.instzaa.controller.dto.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import br.com.efi.efisdk.EfiPay;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import static java.util.Optional.of;
 
 
 @Service
@@ -34,11 +35,13 @@ public class PagamentoService {
 
             EfiPay efi = new EfiPay(options);
 
+            System.out.println("Valor : " + pagamento.valor());
+
             //criando cobrança
             JSONObject cobranca = new JSONObject();
             cobranca.put("calendario", new JSONObject().put("expiracao", 3600));
-            cobranca.put("devedor", new JSONObject().put("cpf", pagamento.CPF()).put("nome", pagamento.Nome()));
-            cobranca.put("valor", new JSONObject().put("original", String.valueOf(pagamento.Valor())));
+            cobranca.put("devedor", new JSONObject().put("cpf", pagamento.cpf()).put("nome", pagamento.nome()));
+            cobranca.put("valor", new JSONObject().put("original", pagamento.valor()));
             cobranca.put("chave", "da95d834-7335-449d-8b5f-d081d5bc1ff8");
             cobranca.put("solicitacaoPagador", "Serviço Realizado.");
 
@@ -59,14 +62,18 @@ public class PagamentoService {
             return new PagamentoQrDTO(qrCode,pix);
     }
 
+
+
     public boolean createPagamentoCartao(PagamentoCartaoDTO pagamento) throws Exception {
         JSONObject options = new JSONObject();
         options.put("client_id", CLIENT_ID);
         options.put("client_secret", CLIENT_SECRET);
-        options.put("certificate", "./certs/homologacao-571485-Instzaa-HML.p12");
-        options.put("sandbox", true);
+        options.put("certificate", certificado);
+        options.put("sandbox", SANDBOX);
 
         EfiPay efi = new EfiPay(options);
+
+        System.out.println(pagamento.Nome());
 
         JSONArray listItem = new JSONArray();
         JSONObject item = new JSONObject();
@@ -105,6 +112,46 @@ public class PagamentoService {
 
         efi.call("createOneStepCharge", new HashMap<>(), body);
         return true;
+
+    }
+
+    public Map<String, Object> listPix() throws Exception{
+        String padrao = "yyyy-MM-dd";
+        String hoje =new SimpleDateFormat(padrao).format(new Date());
+
+
+        JSONObject options = new JSONObject();
+        options.put("client_id", CLIENT_ID);
+        options.put("client_secret", CLIENT_SECRET);
+        options.put("certificate", certificado);
+        options.put("sandbox", SANDBOX);
+
+        EfiPay efi = new EfiPay(options);
+
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("inicio", hoje + "T00:00:00Z");
+        params.put("fim", hoje + "T23:59:30Z");
+
+        Map<String, Object> response = efi.call("pixListCharges", params, new HashMap<String, Object>());
+
+
+        return response;
+    }
+    public Map<String, Object> caixa() throws Exception{
+
+        JSONObject options = new JSONObject();
+        options.put("client_id", CLIENT_ID);
+        options.put("client_secret", CLIENT_SECRET);
+        options.put("certificate", certificado);
+        options.put("sandbox", SANDBOX);
+
+        EfiPay efi = new EfiPay(options);
+
+
+        Map<String, Object> response = efi.call("getAccountBalance", new HashMap<String,String>(), new HashMap<String, Object>());
+
+
+        return response;
 
     }
 }

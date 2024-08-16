@@ -51,6 +51,29 @@ public class PedidoService {
         return pedidoDTO;
     }
 
+    public Pedido updateStatus(Long id){
+        Optional<Pedido> pedidoId = Optional.ofNullable(findById(id));
+        Pedido pedido = pedidoId.get();
+        switch (pedido.getStatus()){
+            case Confirmado -> pedido.setStatus(Status.Fabricando);
+            case Fabricando -> pedido.setStatus(Status.Enviado);
+            case Enviado -> pedido.setStatus(Status.Concluido);
+        }
+        repository.save(pedido);
+        return pedido;
+    }
+    public Pedido updateStatusCancelar(Long id){
+        Optional<Pedido> pedidoId = Optional.ofNullable(findById(id));
+        Pedido pedido = pedidoId.get();
+        switch (pedido.getStatus()){
+            case Confirmado -> pedido.setStatus(Status.Cancelado);
+            case Fabricando -> pedido.setStatus(Status.Cancelado);
+            case Enviado -> pedido.setStatus(Status.Cancelado);
+        }
+        repository.save(pedido);
+        return pedido;
+    }
+
     public List<Pedido> list(){
         return repository.findAll();
     }

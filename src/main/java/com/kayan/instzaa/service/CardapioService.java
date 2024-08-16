@@ -4,7 +4,6 @@ import com.kayan.instzaa.controller.dto.CardapioDTO;
 import com.kayan.instzaa.domain.model.Cardapio;
 import com.kayan.instzaa.domain.repository.CardapioRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.ApplicationScope;
 
 import java.util.List;
 import java.util.Optional;

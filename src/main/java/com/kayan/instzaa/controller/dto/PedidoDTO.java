@@ -18,6 +18,7 @@ public record PedidoDTO(
         String numeroContato,
         BigDecimal valor,
         String status,
+        String payId,
         Set<Cardapio> resumoPedido
 ) {
 
@@ -31,6 +32,7 @@ public record PedidoDTO(
                 pedido.getNumeroContato(),
                 pedido.getValor(),
                 pedido.getStatus().toString(),
+                pedido.getPayId(),
                 pedido.getResumoPedido()
         );
     }
@@ -44,6 +46,7 @@ public record PedidoDTO(
                 pedidoDTO.data(),
                 pedidoDTO.numeroContato(),
                 pedidoDTO.valor(),
+                pedidoDTO.payId(),
                 Status.valueOf(pedidoDTO.status()),
                 pedidoDTO.resumoPedido()
         );

@@ -42,9 +42,13 @@ public class Pedido {
     @Column
     private BigDecimal valor;
 
+    @Column
+    private String payId;
+
     @Enumerated(EnumType.STRING)
     @Column
     private Status status;
+
 
     @ManyToMany
     private Set<Cardapio> resumoPedido;

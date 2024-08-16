@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.kayan.instzaa.domain.model.Cardapio;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 @JsonInclude
 public record CardapioDTO(

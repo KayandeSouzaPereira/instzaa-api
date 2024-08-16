@@ -48,7 +48,6 @@ public class PedidoController {
 
     public ResponseEntity<PedidoDTO> getByID(@PathVariable("id") Long id) {
         Pedido pedido = service.findById(id);
-        System.out.println(pedido.getStatus());
         PedidoDTO pedidoDTO = PedidoDTO.fromDomain(pedido);
         return ResponseEntity.ok(pedidoDTO);
     }
@@ -100,6 +99,30 @@ public class PedidoController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/status/{id}")
+    @Operation(summary = "Atualiza status pelo Id", description = "Atualiza status pelo id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operação bem sucedida !"),
+            @ApiResponse(responseCode = "403", description = "Requisição não autorizada."),
+            @ApiResponse(responseCode = "404", description = "Pedido não encontrado.")
+    })
+    public ResponseEntity<PedidoDTO> updateStatusByID(@PathVariable("id") Long id) {
+        Pedido pedido = service.updateStatus(id);
+        PedidoDTO pedidoDTO = PedidoDTO.fromDomain(pedido);
+        return ResponseEntity.ok(pedidoDTO);
+    }
 
+    @GetMapping("/cancelaStatus/{id}")
+    @Operation(summary = "Cancela pelo Id", description = "Cancela pelo id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operação bem sucedida !"),
+            @ApiResponse(responseCode = "403", description = "Requisição não autorizada."),
+            @ApiResponse(responseCode = "404", description = "Pedido não encontrado.")
+    })
+    public ResponseEntity<PedidoDTO> cancelaStatusByID(@PathVariable("id") Long id) {
+        Pedido pedido = service.updateStatusCancelar(id);
+        PedidoDTO pedidoDTO = PedidoDTO.fromDomain(pedido);
+        return ResponseEntity.ok(pedidoDTO);
+    }
 
 }
