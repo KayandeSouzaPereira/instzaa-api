@@ -48,7 +48,8 @@ public record PedidoDTO(
                 pedidoDTO.valor(),
                 pedidoDTO.payId(),
                 Status.valueOf(pedidoDTO.status()),
-                pedidoDTO.resumoPedido()
+                pedidoDTO.resumoPedido(),
+                0L
         );
     }
 }

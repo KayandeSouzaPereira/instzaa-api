@@ -67,13 +67,13 @@ public class PedidoController {
             @ApiResponse(responseCode = "403", description = "Requisição não autorizada."),
             @ApiResponse(responseCode = "422", description = "Dados para a criação do pedido invalidos.")
     })
-    public ResponseEntity<PedidoDTO> create(@RequestBody PedidoDTO pedidoDTO){
+    public ResponseEntity<String> create(@RequestBody PedidoDTO pedidoDTO){
         Pedido pedido = service.save(pedidoDTO);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(pedido.getId())
                 .toUri();
-        return ResponseEntity.created(location).body(PedidoDTO.fromDomain(pedido));
+        return ResponseEntity.created(location).body("Cadastro feito com sucesso !");
     }
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza o pedido", description =  "Atualiza o pedido")

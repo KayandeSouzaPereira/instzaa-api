@@ -49,11 +49,11 @@ public class Pedido {
     @Column
     private Status status;
 
-
     @ManyToMany
     private Set<Cardapio> resumoPedido;
 
-
+    @Column
+    private Long nota;
 
 
 }

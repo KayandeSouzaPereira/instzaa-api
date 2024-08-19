@@ -41,9 +41,9 @@ public class PagamentoController {
             @ApiResponse(responseCode = "500", description = "Erro na transação."),
             @ApiResponse(responseCode = "403", description = "Requisição não autorizada.")
     })
-    public ResponseEntity<String> criarPagamentoCartao(@RequestBody PagamentoCartaoDTO pagamento) throws Exception{
-        service.createPagamentoCartao(pagamento);
-        return ResponseEntity.ok("Cobranca Realizada !");
+    public ResponseEntity<PagamentoCartaoDadosDTO> criarPagamentoCartao(@RequestBody PagamentoCartaoDTO pagamento) throws Exception{
+
+        return ResponseEntity.ok(service.createPagamentoCartao(pagamento));
     }
 
     @GetMapping("/listaPagamentosPix")

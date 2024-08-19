@@ -24,7 +24,28 @@ public class PagamentoService {
     @Value("${Efi.Cert}")
     private String certificado;
 
+    public String getStatusPix(String txid) throws Exception {
+        JSONObject options = new JSONObject();
+        options.put("client_id", CLIENT_ID);
+        options.put("client_secret", CLIENT_SECRET);
+        options.put("certificate", certificado);
+        options.put("sandbox", SANDBOX);
 
+        EfiPay efi = new EfiPay(options);
+
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("txid", txid);
+
+        JSONObject responseEFI = (JSONObject) efi.call("pixDetailCharge", params, new HashMap<String, Object>());
+        String status = (String) responseEFI.get("status");
+        if (status.contains("CONCLUIDA")){
+            return "Pagamento bem sucedido !";
+        }else if(status.contains("ATIVA")){
+            return "Pagamento em andamento...";
+        }else{
+            return "Ocorreu um problema no pagamento !";
+        }
+    }
 
     public PagamentoQrDTO createPagamento(PagamentoCriacaoDTO pagamento) throws Exception {
             JSONObject options = new JSONObject();
@@ -39,7 +60,7 @@ public class PagamentoService {
 
             //criando cobrança
             JSONObject cobranca = new JSONObject();
-            cobranca.put("calendario", new JSONObject().put("expiracao", 3600));
+            cobranca.put("calendario", new JSONObject().put("expiracao", 7200));
             cobranca.put("devedor", new JSONObject().put("cpf", pagamento.cpf()).put("nome", pagamento.nome()));
             cobranca.put("valor", new JSONObject().put("original", pagamento.valor()));
             cobranca.put("chave", "da95d834-7335-449d-8b5f-d081d5bc1ff8");
@@ -51,6 +72,7 @@ public class PagamentoService {
             JSONObject loc = (JSONObject) responseEFI.get("loc");
             String pix = responseEFI.getString("pixCopiaECola");
             Integer id = (Integer) loc.get("id");
+            String txid = (String) responseEFI.get("txid");
 
             //pegando qrcode
             Map<String, String> paramsQr = new HashMap<String, String>();
@@ -59,12 +81,12 @@ public class PagamentoService {
             JSONObject responseQREFI = efi.call("pixGenerateQRCode", paramsQr, qr);
             String qrCode = responseQREFI.getString("imagemQrcode");
 
-            return new PagamentoQrDTO(qrCode,pix);
+            return new PagamentoQrDTO(qrCode,pix, txid);
     }
 
 
 
-    public boolean createPagamentoCartao(PagamentoCartaoDTO pagamento) throws Exception {
+    public PagamentoCartaoDadosDTO createPagamentoCartao(PagamentoCartaoDTO pagamento) throws Exception {
         JSONObject options = new JSONObject();
         options.put("client_id", CLIENT_ID);
         options.put("client_secret", CLIENT_SECRET);
@@ -110,8 +132,12 @@ public class PagamentoService {
         body.put("payment", pagamentoObj);
         body.put("items", listItem);
 
-        efi.call("createOneStepCharge", new HashMap<>(), body);
-        return true;
+        JSONObject responseEFI = efi.call("createOneStepCharge", new HashMap<>(), body);
+        JSONObject data = responseEFI.getJSONObject("data");
+        System.out.println(responseEFI);
+        PagamentoCartaoDadosDTO result = new PagamentoCartaoDadosDTO((String) data.get("status"), (Integer) data.get("charge_id"));
+
+        return result;
 
     }
 
