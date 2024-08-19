@@ -36,7 +36,7 @@ public class PagamentoService {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("txid", txid);
 
-        JSONObject responseEFI = (JSONObject) efi.call("pixDetailCharge", params, new HashMap<String, Object>());
+        Map<String, Object> responseEFI = efi.call("pixDetailCharge", params, new HashMap<String, Object>());
         String status = (String) responseEFI.get("status");
         if (status.contains("CONCLUIDA")){
             return "Pagamento bem sucedido !";
@@ -140,6 +140,8 @@ public class PagamentoService {
         return result;
 
     }
+
+
 
     public Map<String, Object> listPix() throws Exception{
         String padrao = "yyyy-MM-dd";

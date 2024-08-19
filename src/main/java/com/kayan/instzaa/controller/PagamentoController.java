@@ -46,6 +46,17 @@ public class PagamentoController {
         return ResponseEntity.ok(service.createPagamentoCartao(pagamento));
     }
 
+    @GetMapping("/checkPix/{id}")
+    @Operation(summary = "", description = "")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operação bem sucedida !"),
+            @ApiResponse(responseCode = "500", description = "Erro na transação."),
+            @ApiResponse(responseCode = "403", description = "Requisição não autorizada.")
+    })
+    public ResponseEntity<String> checkPix(@PathVariable("id") String id) throws Exception{
+        return ResponseEntity.ok(service.getStatusPix(id));
+    }
+
     @GetMapping("/listaPagamentosPix")
     @Operation(summary = "Lista Pagamentos Pix", description = "Lista Pagamentos Recebidos com a função de PIX")
     @ApiResponses(value ={
