@@ -73,7 +73,7 @@ public class PedidoController {
                 .path("/{id}")
                 .buildAndExpand(pedido.getId())
                 .toUri();
-        return ResponseEntity.created(location).body("Cadastro feito com sucesso !");
+        return ResponseEntity.created(location).body(String.valueOf(pedido.getId()));
     }
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza o pedido", description =  "Atualiza o pedido")
