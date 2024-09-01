@@ -38,6 +38,17 @@ public class PedidoController {
     public  ResponseEntity<List<Pedido>> list() {
         return ResponseEntity.ok(service.list());
     }
+
+    @GetMapping("/contagem")
+    @Operation(summary = "Contagem de pedidos", description = "Exibe uma contagem de todos os pedidos realizados")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operação bem sucedida !"),
+            @ApiResponse(responseCode = "403", description = "Requisição não autorizada.")
+    })
+    public  ResponseEntity<Integer> contagemPedidos() {
+        return ResponseEntity.ok(service.list().size());
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Pega pelo Id", description = "Retorna um único pedido pelo id.")
     @ApiResponses(value = {
