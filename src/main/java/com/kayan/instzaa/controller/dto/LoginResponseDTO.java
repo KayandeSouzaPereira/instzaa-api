@@ -10,5 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LoginResponseDTO {
     private String token;
+    private String cargo;
     private long expiresIn;
 }

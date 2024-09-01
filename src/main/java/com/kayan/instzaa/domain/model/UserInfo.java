@@ -26,6 +26,9 @@ public class UserInfo implements UserDetails {
     @Column(nullable = false)
     private String fullName;
 
+    @Column(nullable = true)
+    private String role;
+
     @Column(unique = true, length = 100, nullable = false)
     private String email;
 
