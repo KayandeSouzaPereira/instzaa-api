@@ -19,7 +19,7 @@ public class AvaliacaoService {
         return avaliacaoDTO;
     }
 
-    public AvaliacaoDTO findById(Integer id) throws Exception{
+    public AvaliacaoDTO findById(Integer id) throws Exception {
         Avaliacao avaliacao = repository.findByIdPedido(id).get();
         return new AvaliacaoDTO(avaliacao.getIdPedido(), avaliacao.getAvaliacao());
     }

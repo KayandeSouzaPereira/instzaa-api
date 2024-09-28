@@ -19,7 +19,8 @@ public record PedidoDTO(
         BigDecimal valor,
         String status,
         String payId,
-        Set<Cardapio> resumoPedido
+        Set<Cardapio> resumoPedido,
+        Long avaliacao
 ) {
 
     public static PedidoDTO fromDomain(Pedido pedido){
@@ -33,7 +34,8 @@ public record PedidoDTO(
                 pedido.getValor(),
                 pedido.getStatus().toString(),
                 pedido.getPayId(),
-                pedido.getResumoPedido()
+                pedido.getResumoPedido(),
+                pedido.getNota()
         );
     }
 
@@ -49,7 +51,7 @@ public record PedidoDTO(
                 pedidoDTO.payId(),
                 Status.valueOf(pedidoDTO.status()),
                 pedidoDTO.resumoPedido(),
-                0L
+                pedidoDTO.avaliacao()
         );
     }
 }
