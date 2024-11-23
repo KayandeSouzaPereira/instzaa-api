@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.kayan.instzaa.domain.model.Status.*;
+
 @Service
 public class PedidoService {
 
@@ -55,8 +57,8 @@ public class PedidoService {
         Optional<Pedido> pedidoId = Optional.ofNullable(findById(id));
         Pedido pedido = pedidoId.get();
         switch (pedido.getStatus()){
-            case Confirmado -> pedido.setStatus(Status.Fabricando);
-            case Fabricando -> pedido.setStatus(Status.Enviado);
+            case Confirmado -> pedido.setStatus(Fabricando);
+            case Fabricando -> pedido.setStatus(Enviado);
             case Enviado -> pedido.setStatus(Status.Concluido);
         }
         repository.save(pedido);

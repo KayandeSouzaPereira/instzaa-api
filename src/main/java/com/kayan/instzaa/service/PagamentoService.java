@@ -111,8 +111,6 @@ public class PagamentoService {
         cliente.put("email", pagamento.Email());
         cliente.put("birth", pagamento.DataDeNascimento());
 
-        System.out.println(pagamento.DataDeNascimento());
-
 
         JSONObject endereco = new JSONObject();
         endereco.put("street", pagamento.Rua());
