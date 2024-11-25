@@ -7,7 +7,6 @@ Estas compoem:
 
 [Instzaa Adm]()
 
-Para o projeto foi empregado o uso de diversas tecnologias baseadas no framework, microserviços em nuvem, ferramentas de analise dos serviços, 2 tipos de bancos de dados e Arquitetura cebola. 
 
 ### Ideia do projeto
 
