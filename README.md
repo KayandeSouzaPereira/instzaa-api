@@ -45,7 +45,9 @@ Para rodar o projeto utilize:
 
 A documentação Swagger pode ser encontrada ao iniciar o projeto como dev pelo endpoint `/swagger-ui/index.html`.
 
+## Demontração
 
+Uma desmonstração do serviço pode ser encontrada no [link](https://instzaa-api-production.up.railway.app/swagger-ui/index.html)
 
 ## Autores
 
