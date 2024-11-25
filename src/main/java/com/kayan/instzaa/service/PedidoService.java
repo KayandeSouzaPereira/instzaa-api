@@ -49,6 +49,7 @@ public class PedidoService {
         pedido.setData(pedidoDTO.data());
         pedido.setResumoPedido(pedidoDTO.resumoPedido());
         pedido.setStatus(Status.valueOf(pedidoDTO.status()));
+        pedido.setNota(pedidoDTO.avaliacao());
         repository.save(pedido);
         return pedidoDTO;
     }
