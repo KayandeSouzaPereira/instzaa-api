@@ -1,5 +1,9 @@
 # Instzaa API
 
+Um app instantaneo de delivery. 
+Promove comodidade para o usuário para realização de pedidos de delivery que nos exemplos de demonstração serão referentes a menus de pizzaria, porém serve para diversos tipos de comercio.
+
+
 Esta e uma api de serviço para as aplicações Instzaa.
 Estas compoem:
 
