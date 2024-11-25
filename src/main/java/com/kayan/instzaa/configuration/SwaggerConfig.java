@@ -26,7 +26,7 @@ public class SwaggerConfig {
             var contact = new Contact();
             contact.setEmail("kayandesouzapereira@hotmail.com");
             contact.setName("Kayan de Souza");
-            contact.setUrl("https://kayandesouza.vercel.app");
+            contact.setUrl("https://kayanpereira.tech/");
             return new Info()
                     .title("Instzaa API")
                     .description("Api de Delivery")

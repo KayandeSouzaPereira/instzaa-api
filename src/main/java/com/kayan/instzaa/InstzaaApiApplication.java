@@ -13,6 +13,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class InstzaaApiApplication {
 
+	public String PORT = System.getenv("PORT");
+
 	public static void main(String[] args) {
 		SpringApplication.run(InstzaaApiApplication.class, args);
 	}
