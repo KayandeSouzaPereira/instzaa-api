@@ -9,7 +9,7 @@ Estas compoem:
 
 [Instzaa App](https://github.com/KayandeSouzaPereira/instzaa-app)
 
-[Instzaa Adm]()
+[Instzaa Adm](https://github.com/KayandeSouzaPereira/instzaa-adm)
 
 
 ### Ideia do projeto
