@@ -1,0 +1,43 @@
+version: "1.0"
+services:
+  db:
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - 3306:3306
+    networks:
+      - backend
+      - proxy
+    environment:
+      - MYSQL_DATABASE=instzaa
+      - MYSQL_ROOT_PASSWORD=q1w2e3r4t5y6
+    command: --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+    volumes:
+      - ../mysql/db-data:/var/lib/mysql
+
+
+  api_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+      - proxy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/instzaa?useTimezone=true&serverTimezone=America/Sao_Paulo&autoReconnect=true&useSSL=false&sessionVariables=group_concat_max_len=204800&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=q1w2e3r4t5y6
+    depends_on:
+      - db
+
+    volumes:
+      - .m2:/root/.m2
+
+
+networks:
+  backend:
+  proxy:
+    driver: bridge
