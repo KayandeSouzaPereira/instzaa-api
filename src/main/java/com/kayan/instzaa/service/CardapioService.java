@@ -26,6 +26,7 @@ public class CardapioService {
         cardapio.setCategoria(cardapioDTO.categoria());
         cardapio.setDestaque(cardapioDTO.destaque());
         cardapio.setPromocao(cardapioDTO.promocao());
+        cardapio.setItemLanche(cardapioDTO.itemLanche());
         repository.save(cardapio);
         return cardapio;
     }
@@ -40,6 +41,7 @@ public class CardapioService {
         cardapio.setCategoria(cardapioDTO.categoria());
         cardapio.setDestaque(cardapioDTO.destaque());
         cardapio.setPromocao(cardapioDTO.promocao());
+        cardapio.setItemLanche(cardapioDTO.itemLanche());
         repository.save(cardapio);
         return cardapioDTO;
     }
