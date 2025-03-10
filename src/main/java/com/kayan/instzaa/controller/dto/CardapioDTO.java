@@ -15,7 +15,8 @@ public record CardapioDTO(
         BigDecimal preco,
         String categoria,
         boolean destaque,
-        boolean promocao
+        boolean promocao,
+        boolean itemLanche
 
 ) {
     public static CardapioDTO fromDomain(Cardapio cardapio){
@@ -27,17 +28,18 @@ public record CardapioDTO(
                 cardapio.getPreco(),
                 cardapio.getCategoria(),
                 cardapio.isDestaque(),
-                cardapio.isPromocao()
+                cardapio.isPromocao(),
+                cardapio.isItemLanche()
         );
     }
 
     public Cardapio toDomain(){
-        return Cardapio.create(nome,descricao,imagem,preco,categoria,destaque,promocao);
+        return Cardapio.create(id,nome,descricao,imagem,preco,categoria,destaque,promocao,itemLanche);
     }
 
     public Cardapio toDomainUpdate(Integer id){
         return Cardapio.update(
-                id,nome,descricao,imagem,preco,categoria,destaque,promocao
+                id,nome,descricao,imagem,preco,categoria,destaque,promocao,itemLanche
         );
     }
 

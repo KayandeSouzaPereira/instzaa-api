@@ -3,12 +3,9 @@ package com.kayan.instzaa.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedBy;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -45,17 +42,21 @@ public class Cardapio {
     @Column
     private boolean promocao;
 
+    @Column
+    private boolean itemLanche;
 
+    @OneToMany(mappedBy = "cardapio", fetch = FetchType.LAZY)
+    private Set<ItemLanche> itemLanches;
 
-    public Cardapio(String nome, String descricao, String imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao) {
+    public Cardapio(Integer id, String nome, String descricao, String imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao, boolean itemLanche) {
     }
 
 
-    public static Cardapio create(String nome, String descricao, String imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao) {
-        return new Cardapio(nome, descricao, imagem, preco, categoria, destaque, promocao);
+    public static Cardapio create(Integer id, String nome, String descricao, String imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao, boolean itemLanche) {
+        return new Cardapio(id, nome, descricao, imagem, preco, categoria, destaque, promocao, itemLanche);
     }
-    public static Cardapio update(Integer id, String nome, String descricao, String imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao) {
-        return new Cardapio(id, nome, descricao, imagem, preco, categoria, destaque, promocao);
+    public static Cardapio update(Integer id, String nome, String descricao, String imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao, boolean itemLanche) {
+        return new Cardapio(id, nome, descricao, imagem, preco, categoria, destaque, promocao, itemLanche);
     }
 
 }
