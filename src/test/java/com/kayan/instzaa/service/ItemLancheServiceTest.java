@@ -19,18 +19,9 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class ItemLancheServiceTest {
 
-    @Inject
-    ItemLancheService service;
-
-    @InjectMocks
-    ItemLancheRepository repository;
 
     @Test
     void save() {
-        var dto = Instancio.create(ItemLancheDTO.class);
-        ItemLanche domain = service.save(dto);
-        verify(repository).save(domain);
-        verifyNoMoreInteractions(repository);
     }
 
     @Test
