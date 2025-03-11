@@ -50,6 +50,12 @@ public class CardapioService {
         return repository.findAll();
     }
 
+    public List<Cardapio> listCardapio() throws Exception {
+        return repository.findCardapioLanche(true);
+    }
+
+
+
     public List<Cardapio> listPagination(Integer page, Integer limit){
         List<Cardapio> lista = repository.findAll();
 

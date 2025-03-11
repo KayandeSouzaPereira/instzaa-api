@@ -41,6 +41,19 @@ public class CardapioController {
     public ResponseEntity<List<Cardapio>> list() {
         return ResponseEntity.ok(service.list());
     }
+
+
+    @GetMapping("/listCardapio")
+    @Operation(summary = "Lista cardapio para montagem de lanches", description = "Lista todos os itens do para montagem de lanches")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operação bem sucedida !"),
+            @ApiResponse(responseCode = "403", description = "Requisição não autorizada.")
+    })
+    public ResponseEntity<List<Cardapio>> listCardapio() throws Exception{
+        return ResponseEntity.ok(service.listCardapio());
+    }
+
+
     @GetMapping("/{id}")
     @Operation(summary = "Pega pelo Id", description = "Retorna um único item do cardapio pelo id.")
     @ApiResponses(value = {
