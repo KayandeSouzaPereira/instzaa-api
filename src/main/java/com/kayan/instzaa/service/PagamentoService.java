@@ -1,11 +1,11 @@
 package com.kayan.instzaa.service;
-import br.com.efi.efisdk.exceptions.EfiPayException;
+
+import br.com.efi.efisdk.EfiPay;
 import com.kayan.instzaa.controller.dto.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import br.com.efi.efisdk.EfiPay;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
