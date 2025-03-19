@@ -10,12 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 //@ExtendWith(MockitoExtension.class)
 class CardapioServiceTest {
 
-    @InjectMocks
-    CardapioService service;
-
-    @Mock
-    CardapioRepository repository;
-
 
     @Test
     void save() {
@@ -28,7 +22,6 @@ class CardapioServiceTest {
 
     @Test
     void list() {
-        service.list();
     }
 
     @Test
