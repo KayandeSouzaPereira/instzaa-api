@@ -57,5 +57,6 @@ Uma desmonstração do serviço pode ser encontrada no [link](http://ec2-54-233-
 
 ## Autores
 
-- [@kayandesouza](https://github.com/KayandeSouzaPereira) Desenvolvedor do App
+- [@kayandesouza](https://github.com/KayandeSouzaPereira) Desenvolvedor principal da Aplicação móvel, Aplicação Web e Api.
+- [@matheusmarti](https://github.com/Matheus-Marti1) Desenvolvedor responsável pela implementação dos comentários na Aplicação móvel e Api.
 
