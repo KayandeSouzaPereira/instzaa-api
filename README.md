@@ -51,7 +51,7 @@ A documentação Swagger pode ser encontrada ao iniciar o projeto como dev pelo 
 
 ## Demontração
 
-Uma desmonstração do serviço pode ser encontrada no [link](http://ec2-15-229-28-238.sa-east-1.compute.amazonaws.com/swagger-ui/index.html)
+Uma desmonstração do serviço pode ser encontrada no [link](http://ec2-54-233-218-107.sa-east-1.compute.amazonaws.com:8080/swagger-ui/index.html)
 
 ## Autores
 
