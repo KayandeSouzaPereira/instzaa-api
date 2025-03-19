@@ -24,6 +24,8 @@ Uma api de serviço para um app de delivery e uma pagina web de gestão deste de
 - Listagem de pagamentos por PIX.
 - Confirmação de validação de pagamento por PIX.
 - Busca de valor em caixa (implementação de serviço Efipay).
+- Criação de lanches customizados com menu a parte.
+- Criação e listagem de comentarios.
 
 ## Stack utilizada
 
