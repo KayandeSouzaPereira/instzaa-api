@@ -7,6 +7,7 @@ import com.kayan.instzaa.domain.model.Cardapio;
 import com.kayan.instzaa.domain.model.Pedido;
 import com.kayan.instzaa.domain.model.Status;
 import com.kayan.instzaa.domain.repository.PedidoRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,15 +20,19 @@ public class PedidoService {
 
     private final PedidoRepository repository;
 
+    private final PasswordEncoder passwordEncoder;
 
-    public PedidoService(PedidoRepository repository) {
+
+    public PedidoService(PedidoRepository repository, PasswordEncoder passwordEncoder) {
+
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Pedido save(PedidoDTO pedidoDTO) {
         Pedido pedido = new Pedido();
         pedido.setNomeCliente(pedidoDTO.nomeCliente());
-        pedido.setCPF(pedidoDTO.cpf());
+        pedido.setCPF(passwordEncoder.encode(pedidoDTO.cpf()));
         pedido.setEndereco(pedidoDTO.endereco());
         pedido.setValor(pedidoDTO.valor());
         pedido.setNumeroContato(pedidoDTO.numeroContato());
@@ -42,7 +47,7 @@ public class PedidoService {
         Optional<Pedido> pedidoId = Optional.ofNullable(findById(id));
         Pedido pedido = pedidoId.get();
         pedido.setNomeCliente(pedidoDTO.nomeCliente());
-        pedido.setCPF(pedidoDTO.cpf());
+        pedido.setCPF(passwordEncoder.encode(pedidoDTO.cpf()));
         pedido.setEndereco(pedidoDTO.endereco());
         pedido.setValor(pedidoDTO.valor());
         pedido.setNumeroContato(pedidoDTO.numeroContato());

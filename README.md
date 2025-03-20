@@ -52,8 +52,9 @@ Para rodar o projeto utilize:
 A documentação Swagger pode ser encontrada ao iniciar o projeto como dev pelo endpoint `/swagger-ui/index.html`.
 
 ## Demontração
+Uma desmonstração do serviço pode ser encontrada no [link](http://ec2-56-124-45-234.sa-east-1.compute.amazonaws.com:8080/swagger-ui/index.html)
 
-Uma desmonstração do serviço pode ser encontrada no [link](http://ec2-54-233-218-107.sa-east-1.compute.amazonaws.com:8080/swagger-ui/index.html)
+Para economia de recursos a nuvem da api não se encontra ligada sempre, caso seja esta a situação utilize o [link](https://6pfgw28ez3.execute-api.sa-east-1.amazonaws.com/default/InstzaaServerPremisse) e aguarde um minuto e tente novamente.
 
 ## Autores
 

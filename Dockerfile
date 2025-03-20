@@ -1,4 +1,10 @@
-FROM openjdk:17
+FROM openjdk:17-jdk-slim
+FROM maven:3-openjdk-17-slim as maven_build
+
+COPY pom.xml pom.xml
+COPY src src
+
+RUN mvn clean package
 
 ARG SPRING_DATASOURCE_URL
 ENV SPRING_DATASOURCE_URL = ${SPRING_DATASOURCE_URL}
@@ -9,6 +15,6 @@ ENV SPRING_DATASOURCE_USERNAME = ${SPRING_DATASOURCE_USERNAME}
 ARG SPRING_DATASOURCE_PASSWORD
 ENV SPRING_DATASOURCE_PASSWORD = ${SPRING_DATASOURCE_PASSWORD}
 
-ADD ./instzaa.jar instzaa.jar
+ADD ./target/instzaa.jar instzaa.jar
 ADD ./certs/homologacao-571485-InstzaaHMLv2.p12 /certs/homologacao-571485-InstzaaHMLv2.p12
 ENTRYPOINT ["java", "-jar", "instzaa.jar"]

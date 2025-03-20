@@ -1,7 +1,7 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : localDev
+ Source Server         : InstzaaEC2
  Source Server Type    : MySQL
  Source Server Version : 80041 (8.0.41)
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 80041 (8.0.41)
  File Encoding         : 65001
 
- Date: 12/03/2025 16:19:40
+ Date: 20/03/2025 09:32:47
 */
 
 SET NAMES utf8mb4;
@@ -92,6 +92,41 @@ CREATE TABLE `cardapio_seq`  (
 INSERT INTO `cardapio_seq` VALUES (351);
 
 -- ----------------------------
+-- Table structure for comentario
+-- ----------------------------
+DROP TABLE IF EXISTS `comentario`;
+CREATE TABLE `comentario`  (
+  `id_comentario` int NOT NULL,
+  `comentario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `data_comentario` datetime(6) NULL DEFAULT NULL,
+  `id_cardapio` int NOT NULL,
+  `nome_comentario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nota` int NOT NULL,
+  PRIMARY KEY (`id_comentario`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of comentario
+-- ----------------------------
+INSERT INTO `comentario` VALUES (1, 'Amei as duas pizzas', '2025-03-19 19:24:43.123000', 2, 'Kayan de Souza', 4);
+INSERT INTO `comentario` VALUES (2, 'Amei as duas pizzas', '2025-03-19 19:24:43.577000', 3, 'Kayan de Souza', 4);
+INSERT INTO `comentario` VALUES (3, 'Mistura incomum, mas deliciosa. Recomendo !!!!! 😀😀', '2025-03-19 19:42:00.848000', 52, 'Kayan de Souza', 5);
+INSERT INTO `comentario` VALUES (4, 'Mistura incomum, mas deliciosa. Recomendo !!!!! 😀😀', '2025-03-19 19:42:01.034000', 4, 'Kayan de Souza', 5);
+
+-- ----------------------------
+-- Table structure for comentario_seq
+-- ----------------------------
+DROP TABLE IF EXISTS `comentario_seq`;
+CREATE TABLE `comentario_seq`  (
+  `next_val` bigint NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of comentario_seq
+-- ----------------------------
+INSERT INTO `comentario_seq` VALUES (101);
+
+-- ----------------------------
 -- Table structure for empresa
 -- ----------------------------
 DROP TABLE IF EXISTS `empresa`;
@@ -137,7 +172,7 @@ CREATE TABLE `item_lanche`  (
   PRIMARY KEY (`id_item_lanche`) USING BTREE,
   INDEX `FK5hav3bxhub69rmqxdw2vh8lyt`(`id` ASC) USING BTREE,
   CONSTRAINT `FK5hav3bxhub69rmqxdw2vh8lyt` FOREIGN KEY (`id`) REFERENCES `cardapio` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of item_lanche
@@ -149,7 +184,7 @@ CREATE TABLE `item_lanche`  (
 DROP TABLE IF EXISTS `item_lanche_seq`;
 CREATE TABLE `item_lanche_seq`  (
   `next_val` bigint NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of item_lanche_seq
@@ -177,8 +212,10 @@ CREATE TABLE `pedido`  (
 -- ----------------------------
 -- Records of pedido
 -- ----------------------------
-INSERT INTO `pedido` VALUES (252, '38744208847', '2025-03-11 13:06:11.678000', '{\"cep\":\"03590140\",\"rua\":\"Rua Padre José de Castilho\",\"numero\":\"45\",\"bairro\":\"Conjunto Habitacional Padre Manoel da Nóbrega\",\"uf\":\"SP\",\"cidade\":\"São Paulo\"}', 'Kayan de Souza', NULL, '11987955628', NULL, 'Cancelado', 0.50);
-INSERT INTO `pedido` VALUES (253, '38744208847', '2025-03-11 13:16:17.084000', '{\"cep\":\"03590140\",\"rua\":\"Rua Padre José de Castilho\",\"numero\":\"45\",\"bairro\":\"Conjunto Habitacional Padre Manoel da Nóbrega\",\"uf\":\"SP\",\"cidade\":\"São Paulo\"}', 'Kayan de Souza Pereira', NULL, '11 987955628', NULL, 'Confirmado', 0.50);
+INSERT INTO `pedido` VALUES (252, '', '2025-03-11 13:06:11.678000', '{\"cep\":\"03590140\",\"rua\":\"Rua Padre José de Castilho\",\"numero\":\"45\",\"bairro\":\"Conjunto Habitacional Padre Manoel da Nóbrega\",\"uf\":\"SP\",\"cidade\":\"São Paulo\"}', 'Kayan de Souza', NULL, '11987955628', NULL, 'Cancelado', 0.50);
+INSERT INTO `pedido` VALUES (253, '', '2025-03-11 13:16:17.084000', '{\"cep\":\"03590140\",\"rua\":\"Rua Padre José de Castilho\",\"numero\":\"45\",\"bairro\":\"Conjunto Habitacional Padre Manoel da Nóbrega\",\"uf\":\"SP\",\"cidade\":\"São Paulo\"}', 'Kayan de Souza ', NULL, '11 987955628', NULL, 'Cancelado', 0.50);
+INSERT INTO `pedido` VALUES (302, '', '2025-03-19 18:41:28.490000', '{\"cep\":\"03590140\",\"rua\":\"Rua Padre José de Castilho\",\"numero\":\"45\",\"bairro\":\"Conjunto Habitacional Padre Manoel da Nóbrega\",\"uf\":\"SP\",\"cidade\":\"São Paulo\"}', 'Kayan de Souza', NULL, '11987955628', NULL, 'Concluido', 81.00);
+INSERT INTO `pedido` VALUES (303, '', '2025-03-19 19:36:06.003000', '{\"cep\":\"03590140\",\"rua\":\"Rua Padre José de Castilho\",\"numero\":\"45\",\"bairro\":\"Conjunto Habitacional Padre Manoel da Nóbrega\",\"uf\":\"SP\",\"cidade\":\"São Paulo\"}', 'Kayan de Souza', NULL, '11987955628', NULL, 'Concluido', 115.50);
 
 -- ----------------------------
 -- Table structure for pedido_resumo_pedido
@@ -196,6 +233,10 @@ CREATE TABLE `pedido_resumo_pedido`  (
 -- ----------------------------
 -- Records of pedido_resumo_pedido
 -- ----------------------------
+INSERT INTO `pedido_resumo_pedido` VALUES (302, 2);
+INSERT INTO `pedido_resumo_pedido` VALUES (302, 3);
+INSERT INTO `pedido_resumo_pedido` VALUES (303, 4);
+INSERT INTO `pedido_resumo_pedido` VALUES (303, 52);
 INSERT INTO `pedido_resumo_pedido` VALUES (252, 102);
 INSERT INTO `pedido_resumo_pedido` VALUES (253, 102);
 
@@ -210,7 +251,7 @@ CREATE TABLE `pedido_seq`  (
 -- ----------------------------
 -- Records of pedido_seq
 -- ----------------------------
-INSERT INTO `pedido_seq` VALUES (351);
+INSERT INTO `pedido_seq` VALUES (401);
 
 -- ----------------------------
 -- Table structure for users
@@ -233,9 +274,6 @@ CREATE TABLE `users`  (
 -- ----------------------------
 INSERT INTO `users` VALUES (1, '2024-11-21 08:02:06.636000', 'test@test.com', 'test@test.com', '$2a$10$KAUhPSNfpMIv9r3uVqqWD.bu6M5BMjaSfqcJTnTpHljMFRDmQm4m.', 'Admin', '2024-11-21 08:02:06.636000');
 INSERT INTO `users` VALUES (2, '2024-11-23 11:04:11.801000', 'instzaa@app.com', 'instzaa@app.com', '$2a$10$BvI4wT0sX7m4ZTuwBWltuux/Vx.C1Ak7aj2QPtD/9aUG.77k3eSvi', 'APP', '2024-11-23 11:04:11.801000');
-INSERT INTO `users` VALUES (52, '2025-03-11 12:13:16.697000', 'kayan@teste1.com', 'kayan@teste1.com', '$2a$10$uOwkIb.MvqwyYoxSYq0Fyej4nSbfm4lXroW5BuncFSeOfTAUdltDK', 'admin', '2025-03-11 12:13:16.697000');
-INSERT INTO `users` VALUES (54, '2025-03-11 12:13:32.301000', 'kayan@teste2.com', 'kayan@teste2.com', '$2a$10$EFGcSfr6I00UfLyuV4ouZuJdksOXz54wPRK7uO9y6F2VrYDiZwZq6', 'admin', '2025-03-11 12:13:32.301000');
-INSERT INTO `users` VALUES (55, '2025-03-11 12:14:06.814000', 'kayan@teste3.com', 'kayan@teste3.com', '$2a$10$jAbjIS9wM9YIe6huBIsBSOrvg1vKkVE3Pib62SnO6LhEzot.xYOty', 'admin', '2025-03-11 12:14:06.814000');
 
 -- ----------------------------
 -- Table structure for users_seq
@@ -248,6 +286,6 @@ CREATE TABLE `users_seq`  (
 -- ----------------------------
 -- Records of users_seq
 -- ----------------------------
-INSERT INTO `users_seq` VALUES (151);
+INSERT INTO `users_seq` VALUES (201);
 
 SET FOREIGN_KEY_CHECKS = 1;

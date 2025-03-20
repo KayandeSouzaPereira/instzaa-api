@@ -13,7 +13,9 @@ services:
       - MYSQL_ROOT_PASSWORD=q1w2e3r4t5y6
     command: --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
     volumes:
+      - ./database_mock/instzaa_mock.sql:/docker-entrypoint-initdb.d/0_init.sql
       - ../mysql/db-data:/var/lib/mysql
+
 
 
   api_service:
@@ -22,7 +24,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - 80:8080
+      - 8080:8080
     networks:
       - backend
       - proxy
