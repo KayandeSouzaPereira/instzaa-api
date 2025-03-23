@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Entity
 @Data
@@ -44,12 +43,6 @@ public class Cardapio {
 
     @Column
     private boolean itemLanche;
-
-    @OneToMany(mappedBy = "cardapio", fetch = FetchType.LAZY)
-    private Set<ItemLanche> itemLanches;
-
-    public Cardapio(Integer id, String nome, String descricao, String imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao, boolean itemLanche) {
-    }
 
 
     public static Cardapio create(Integer id, String nome, String descricao, String imagem, BigDecimal preco, String categoria, boolean destaque, boolean promocao, boolean itemLanche) {
