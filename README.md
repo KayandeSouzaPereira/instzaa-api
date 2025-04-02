@@ -54,7 +54,7 @@ A documentação Swagger pode ser encontrada ao iniciar o projeto como dev pelo 
 ## Demontração
 Uma desmonstração do serviço pode ser encontrada no [link](http://ec2-56-124-45-234.sa-east-1.compute.amazonaws.com/swagger-ui/index.html)
 
-Para economia de recursos a nuvem da api não se encontra ligada sempre, caso seja esta a situação utilize o [link](https://6pfgw28ez3.execute-api.sa-east-1.amazonaws.com/default/InstzaaServerPremisse), aguarde um minuto e tente novamente.
+Para economia de recursos a nuvem da api não se encontra ligada sempre, caso seja esta a situação utilize o [link](https://gurcxnnq0g.execute-api.sa-east-1.amazonaws.com/dev/InstzaaServerPremisse), aguarde um minuto e tente novamente.
 
 ## Autores
 
